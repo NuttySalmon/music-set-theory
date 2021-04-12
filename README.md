@@ -7,7 +7,7 @@ This is a script to assist musical analysis through musical [set theory](https:/
 
 with steps output for better understanding the calculation processes and for debugging.
 
-_This script is by no means the most effecient way of calculation. Feel free to collaborate and give suggestions for more features._
+__This script is by no means the most effecient way of calculation. Feel free to collaborate and give suggestions for more features.__
 
 ## Dependency:
 
@@ -22,7 +22,8 @@ E.g. `B Eb C# D G`
 
 Sample output:
 
-    Type in notes seprated by space then press enter: B Eb C# D G
+    >python set_theory.py
+    Type in notes seprated by space then press enter: B Eb C# D G   
 
     Parse input...
 
@@ -60,7 +61,9 @@ Sample output:
 
     Calculate prime form...
 
-    Calculate ICV...
+    ----- Calculate ICV -----
+    Interval classes: [1, 2, 4, 4, 1, 3, 5, 2, 6, 4]
+    [2, 2, 1, 3, 1, 1]
 
     ========= RESULTS =========
     Pitch class (PC) list: [1, 2, 3, 7, 11]
@@ -69,5 +72,5 @@ Sample output:
     Inversion normal: D#, E, F, G, B ([15, 16, 17, 19, 23])
     Best normal order: D#, E, F, G, B ([15, 16, 17, 19, 23])
     Prime: [0, 1, 2, 4, 8]
-    Interval class vector: <110201>
+    Interval class vector: <221311> 
 

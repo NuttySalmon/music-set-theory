@@ -272,27 +272,50 @@ def get_interval_classes(prime_form: List[int]) -> List[int]:
         List[int]: Interval classses
 
     Note:
-        Input MUST be in prime form
         Interval class outputnumber should be within the range of 1 to 6
     """
     interval_classes = []
-    for pci in prime_form:
-        # keep interval class number less than 6
-        interval_class = pci if pci <= 6 else 12 - pci
-        interval_classes.append(interval_class)
+
+    # calculate all PCI combinations
+    for i in range(len(prime_form)):
+        # set current element as lower note
+        low = prime_form[i]
+        # calculate PCI with all elements after current element as higher note
+        for high in prime_form[i + 1 :]:
+            pci = high - low  # calculate half steps
+            # get interval class
+            interval_class = pci if pci <= 6 else 12 - pci
+            interval_classes.append(interval_class)
     return interval_classes
 
 
-def icv_calc(pci_list: List[int]) -> List[int]:
-    """Calculate the interval class vector (ICV) from given list of intervals
+def icv_calc(prime_form: List[int]) -> List[int]:
+    """Calculate the interval class vector (ICV) from given prime form
 
     Args:
-        pci_list (List[int]): Interval in terms of half step count
+        prime_form (List[int]): Prime form
 
     Returns:
         List[int]: Interval classs vector
     """
-    interval_classes = get_interval_classes(pci_list)
+    prime_form.sort()  # make sure sorted
+    interval_classes = get_interval_classes(prime_form)
+    print("Interval classes: {}".format(interval_classes))
+    icv = icv_summing(interval_classes)
+    print(icv)
+    return icv
+
+
+def icv_summing(interval_classes: List[int]) -> List[int]:
+    """Counting the provided interval classes to form ICV
+
+    Args:
+        interval_classes (List[int]): Interval classes in 1 to 6
+
+    Returns:
+        List[int]: The count of interval class with [0] for class 1\
+            [1] for class 2 etc.
+    """
     icv = [0, 0, 0, 0, 0, 0]
     for interval_class in interval_classes:
         index = interval_class - 1
@@ -333,7 +356,7 @@ if __name__ == "__main__":
     print(best)
     print("\nCalculate prime form...")
     prime_form = prime_calc(best)
-    print("\nCalculate ICV...")
+    print("\n----- Calculate ICV -----")
     icv = icv_calc(prime_form)
     print("\n========= RESULTS =========")
     print("Pitch class (PC) list: {}".format(pc_list))
