@@ -15,17 +15,36 @@ __This script is by no means the most effecient way of calculation. Feel free to
 * mingus
 
 ## Usage:
+Assuming the correct Python 3 and Pip is installed on computer, clone repo and install dependencies:
+    git clone https://github.com/NuttySalmon/music-set-theory.git
+    cd music-set-theory
+    pip3 install -r requirements.txt
 
-Just run the script after installing dependencies and type in notes seprated by space:
+#### Calculating for single set:
 
-E.g. `B Eb C# D G`
+In the project directory, run the script after installing dependencies and type in notes seprated by space. E.g. `B Eb C# D G`
 
-Sample output:
+    python3 set_theory.py 
 
-    >python set_theory.py
-    Type in notes seprated by space then press enter: B Eb C# D G   
+#### Clculating prime form for all possible combination of given number:
 
-    Parse input...
+Run script, put in set of notes similar to in `set_theory.py`. Specify the number of notes to pick from set.
+
+    python3 all_prime_combination.py 
+
+`Ctrl + C` to stop
+
+
+## Sample outputs
+
+#### For `set_theory.py`
+
+    > python3 set_theory.py
+    *****Set Theory Calculator*****
+    Type in notes in set (seprated by space Eg: C Eb G F#), then press enter. Type "exit" to quit.
+
+    Note set: B Eb C# D G
+    Parsing input...
 
     ----- Calculate normal -----
     Pitch class interval (PCI) list: [1, 1, 4, 4, 2]
@@ -66,11 +85,34 @@ Sample output:
     [2, 2, 1, 3, 1, 1]
 
     ========= RESULTS =========
+    Original input: B Eb C# D G
     Pitch class (PC) list: [1, 2, 3, 7, 11]
     Normal: B, C#, D, D#, G ([11, 13, 14, 15, 19])
     Inversion: B, D#, E, F, G ([11, 15, 16, 17, 19])
     Inversion normal: D#, E, F, G, B ([15, 16, 17, 19, 23])
     Best normal order: D#, E, F, G, B ([15, 16, 17, 19, 23])
-    Prime: [0, 1, 2, 4, 8]
-    Interval class vector: <221311> 
+    Prime: [01248]
+    Interval class vector: <221311>
 
+    Note set: 
+
+
+#### For `all_prime_combination.py`
+
+    > python3 all_prime_combination.py
+    Notes (leave empty to use previous): C E G F#
+    Pick: 3
+    [(0, 4, 6), (0, 4, 7), (0, 6, 7), (4, 6, 7)]
+
+    ...
+
+and finally:
+
+    ======================
+    RESULTS
+    ======================
+    Pick 3 from C E G F#:
+    C, E, F#: [026]
+    C, E, G: [037]
+    C, F#, G: [016]
+    E, F#, G: [013]
