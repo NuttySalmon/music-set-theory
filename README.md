@@ -1,20 +1,22 @@
 # Music set theory calculations (post-tonal analysis)
 
-This is a script to assist musical analysis through musical [set theory](https://en.wikipedia.org/wiki/Set_theory_(music)), especially for post-tonal music. Able to calculate:
+Calculation tool to assist music theory analysis that uses [musical set theory](https://en.wikipedia.org/wiki/Set_theory_(music)), especially for post-tonal music. Able to calculate:
 * [Normal order](https://musictheory.pugetsound.edu/mt21c/PrimeForm.html)
 * [Prime form](https://musictheory.pugetsound.edu/mt21c/PrimeForm.html)  (from inversion normal and normal)
 * [Interval class vector](https://en.wikipedia.org/wiki/Interval_vector)
+* All prime forms for all subset combinations of a given subset size
 
 with steps output for better understanding the calculation processes and for debugging.
 
 __This script is by no means the most effecient way of calculation. Feel free to collaborate and give suggestions for more features.__
 
-## Dependency:
+## Dependency
 
 * Python version >= 3.6
 * mingus
 
-## Usage:
+
+## Usage
 #### Setup
 1. Before running any scripts, make sure correct Python 3 and Pip are installed on computer
 2. clone repo and install dependencies:
@@ -23,26 +25,28 @@ __This script is by no means the most effecient way of calculation. Feel free to
         cd music-set-theory
         pip3 install -r requirements.txt
 
+
 #### Calculating for single set:
 
-1. In the project directory, run the script after 
+1. In the project directory, run script: 
 
-        python3 set_theory.py 
+        python3 ./set_theory.py 
 
 2. Following on screen prompt, input notes seprated by space. E.g. `B Eb C# D G`.
 3. Once result is displayed, users can enter new set of notes for another calculation.
 
 
-#### Calculating prime form for all possible combination of given number:
+#### Calculating all prime form values for subsets of given size:
 
-1. Run script, put in set of notes similar to in `set_theory.py`. 
+1. In project directory, run script: 
 
-        python3 all_prime_combinations.py 
+        python3 ./subsets_prime.py 
 
 2. Following on screen prompt, input notes and the number of notes to pick from set for combinations.
 3. Once result is displayed, users can enter new set of parameters for calculation.
 
 `Ctrl + C` to quit Python.
+
 
 ## Sample outputs
 
@@ -106,9 +110,9 @@ __This script is by no means the most effecient way of calculation. Feel free to
     Note set: 
 
 
-#### For calculating all combinations:
+#### Calculating for subsets:
 
-    > python3 all_prime_combinations.py
+    > python3 subsets_prime.py
     Notes (leave empty to use previous): C E G F#
     Pick: 3
     [(0, 4, 6), (0, 4, 7), (0, 6, 7), (4, 6, 7)]
