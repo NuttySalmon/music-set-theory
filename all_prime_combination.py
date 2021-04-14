@@ -2,8 +2,13 @@ from itertools import combinations
 from set_theory import parse_notes_str, calc, note_from_int
 
 if __name__ == "__main__":
+    prev_input = ''
     while True:
-        user_input = input("Notes: ")
+        user_input = input("\nNotes (leave empty to use previous): ")
+        if len(user_input.strip()) == 0:
+            user_input = prev_input
+        else:
+            prev_input = user_input
         pick = input("Pick: ")
         pc_list = parse_notes_str(user_input)
 
