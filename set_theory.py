@@ -377,6 +377,7 @@ if __name__ == "__main__":
         print("\n----- Calculate ICV -----")
         icv = icv_calc(prime_form)
         print("\n========= RESULTS =========")
+        print("Original input: {}".format(user_input))
         print("Pitch class (PC) list: {}".format(pc_list))
         print("Normal: {}".format(format_pc(normal)))
         print("Inversion: {}".format(format_pc(inversion)))
