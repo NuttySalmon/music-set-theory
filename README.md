@@ -22,22 +22,28 @@ Assuming the correct Python 3 and Pip is installed on computer, clone repo and i
 
 #### Calculating for single set:
 
-In the project directory, run the script after installing dependencies and type in notes seprated by space. E.g. `B Eb C# D G`
+1. In the project directory, run the script after 
 
-    python3 set_theory.py 
+        python3 set_theory.py 
 
-#### Clculating prime form for all possible combination of given number:
+2. Following on screen prompt, input notes seprated by space. E.g. `B Eb C# D G`.
+3. Once result is displayed, users can enter new set of notes for another calculation.
 
-Run script, put in set of notes similar to in `set_theory.py`. Specify the number of notes to pick from set.
 
-    python3 all_prime_combination.py 
+#### Calculating prime form for all possible combination of given number:
 
-`Ctrl + C` to stop
+1. Run script, put in set of notes similar to in `set_theory.py`. 
 
+        python3 all_prime_combinations.py 
+
+2. Following on screen prompt, input notes and the number of notes to pick from set for combinations.
+3. Once result is displayed, users can enter new set of parameters for calculation.
+
+`Ctrl + C` to quit Python.
 
 ## Sample outputs
 
-#### For `set_theory.py`
+#### For single set calculation: 
 
     > python3 set_theory.py
     *****Set Theory Calculator*****
@@ -97,9 +103,9 @@ Run script, put in set of notes similar to in `set_theory.py`. Specify the numbe
     Note set: 
 
 
-#### For `all_prime_combination.py`
+#### For calculating all combinations:
 
-    > python3 all_prime_combination.py
+    > python3 all_prime_combinations.py
     Notes (leave empty to use previous): C E G F#
     Pick: 3
     [(0, 4, 6), (0, 4, 7), (0, 6, 7), (4, 6, 7)]
