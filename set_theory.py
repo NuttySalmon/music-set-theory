@@ -344,6 +344,31 @@ def parse_notes_str(input_str: str) -> List[int]:
     pc_list.sort()
     return pc_list
 
+def calc(pc_list):
+    print("\n----- Calculate normal -----")
+    normal = get_normal(pc_list)
+    print("\n----- Calculate inversion -----")
+    inversion = make_inversion(normal)
+    print(inversion)
+    print("\n----- Calculate inversion normal -----")
+    inversion_normal = get_normal(inversion)
+    print("\n----- Find best normal order -----")
+    best = most_compact([normal, inversion, inversion_normal])
+    print(best)
+    print("\nCalculate prime form...")
+    prime_form = prime_calc(best)
+    print("\n----- Calculate ICV -----")
+    icv = icv_calc(prime_form)
+
+    result_dict ={
+        'normal': normal,
+        'inversion': inversion,
+        'inversion_normal': inversion_normal,
+        'prime': prime_form,
+        'best': best,
+        'icv': icv,
+    }
+    return result_dict
 
 if __name__ == "__main__":
     print(
@@ -362,27 +387,17 @@ if __name__ == "__main__":
         except NoteFormatError:
             print("!! ERROR: Invalid input! !!")
             continue
-        print("\n----- Calculate normal -----")
-        normal = get_normal(pc_list)
-        print("\n----- Calculate inversion -----")
-        inversion = make_inversion(normal)
-        print(inversion)
-        print("\n----- Calculate inversion normal -----")
-        inversion_normal = get_normal(inversion)
-        print("\n----- Find best normal order -----")
-        best = most_compact([normal, inversion, inversion_normal])
-        print(best)
-        print("\nCalculate prime form...")
-        prime_form = prime_calc(best)
-        print("\n----- Calculate ICV -----")
-        icv = icv_calc(prime_form)
+
+        result = calc(pc_list)
+
         print("\n========= RESULTS =========")
         print("Original input: {}".format(user_input))
         print("Pitch class (PC) list: {}".format(pc_list))
-        print("Normal: {}".format(format_pc(normal)))
-        print("Inversion: {}".format(format_pc(inversion)))
-        print("Inversion normal: {}".format(format_pc(inversion_normal)))
-        print("Best normal order: {}".format(format_pc(best)))
-        print("Prime: {}".format(prime_calc(best)))
-        icv_str = "".join([str(n) for n in icv])
+        print("Normal: {}".format(format_pc(result['normal'])))
+        print("Inversion: {}".format(format_pc(result['inversion'])))
+        print("Inversion normal: {}".format(format_pc(result['inversion_normal'])))
+        print("Best normal order: {}".format(format_pc(result['best'])))
+        prime_str = ''.join([str(num) for num in result['prime']])
+        print("Prime: [{}]".format(prime_str))
+        icv_str = "".join([str(n) for n in result['icv']])
         print("Interval class vector: <{}>".format(icv_str))
