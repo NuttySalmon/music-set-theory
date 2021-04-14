@@ -4,6 +4,7 @@
 from typing import List, Any
 import mingus.core.notes as notes
 from mingus.containers.note import Note
+from mingus.core.mt_exceptions import NoteFormatError
 
 
 def notes_to_pc(note_str_list: List[str]) -> List[int]:
@@ -21,7 +22,11 @@ def notes_to_pc(note_str_list: List[str]) -> List[int]:
     """
     pc_list = []
     for n in note_str_list:
-        pc = notes.note_to_int(n)
+        # make sure letter name is upper case
+        n_split = list(n)
+        n_split[0] = n_split[0].upper()
+        n_formatted = "".join(n_split)
+        pc = notes.note_to_int(n_formatted)
         pc_list.append(pc)
     pc_list = list(set(pc_list))
     pc_list.sort()
@@ -341,29 +346,37 @@ def parse_notes_str(input_str: str) -> List[int]:
 
 
 if __name__ == "__main__":
-    user_input = input("Type in notes seprated by space then press enter: ")
-    print("\nParse input...")
-    pc_list = parse_notes_str(user_input)
-    print("\n----- Calculate normal -----")
-    normal = get_normal(pc_list)
-    print("\n----- Calculate inversion -----")
-    inversion = make_inversion(normal)
-    print(inversion)
-    print("\n----- Calculate inversion normal -----")
-    inversion_normal = get_normal(inversion)
-    print("\n----- Find best normal order -----")
-    best = most_compact([normal, inversion, inversion_normal])
-    print(best)
-    print("\nCalculate prime form...")
-    prime_form = prime_calc(best)
-    print("\n----- Calculate ICV -----")
-    icv = icv_calc(prime_form)
-    print("\n========= RESULTS =========")
-    print("Pitch class (PC) list: {}".format(pc_list))
-    print("Normal: {}".format(format_pc(normal)))
-    print("Inversion: {}".format(format_pc(inversion)))
-    print("Inversion normal: {}".format(format_pc(inversion_normal)))
-    print("Best normal order: {}".format(format_pc(best)))
-    print("Prime: {}".format(prime_calc(best)))
-    icv_str = "".join([str(n) for n in icv])
-    print("Interval class vector: <{}>".format(icv_str))
+    while True:
+        user_input = input("\nType in notes in set (seprated by space), then press enter. (Eg: C Eb G F#)\n Notes: ")
+        print("\nParse input...")
+        try:
+            pc_list = parse_notes_str(user_input)
+            if len(pc_list) == 0:
+                print("*** Empty set ***")
+                continue
+        except NoteFormatError:
+            print("*** Invalid input! ***")
+            continue
+        print("\n----- Calculate normal -----")
+        normal = get_normal(pc_list)
+        print("\n----- Calculate inversion -----")
+        inversion = make_inversion(normal)
+        print(inversion)
+        print("\n----- Calculate inversion normal -----")
+        inversion_normal = get_normal(inversion)
+        print("\n----- Find best normal order -----")
+        best = most_compact([normal, inversion, inversion_normal])
+        print(best)
+        print("\nCalculate prime form...")
+        prime_form = prime_calc(best)
+        print("\n----- Calculate ICV -----")
+        icv = icv_calc(prime_form)
+        print("\n========= RESULTS =========")
+        print("Pitch class (PC) list: {}".format(pc_list))
+        print("Normal: {}".format(format_pc(normal)))
+        print("Inversion: {}".format(format_pc(inversion)))
+        print("Inversion normal: {}".format(format_pc(inversion_normal)))
+        print("Best normal order: {}".format(format_pc(best)))
+        print("Prime: {}".format(prime_calc(best)))
+        icv_str = "".join([str(n) for n in icv])
+        print("Interval class vector: <{}>".format(icv_str))
