@@ -15,7 +15,10 @@ __This script is by no means the most effecient way of calculation. Feel free to
 * mingus
 
 ## Usage:
-Assuming the correct Python 3 and Pip is installed on computer, clone repo and install dependencies:
+#### Setup
+1. Before running any scripts, make sure correct Python 3 and Pip are installed on computer
+2. clone repo and install dependencies:
+
     git clone https://github.com/NuttySalmon/music-set-theory.git
     cd music-set-theory
     pip3 install -r requirements.txt
