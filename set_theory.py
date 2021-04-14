@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
-from typing import List, Any
+from typing import Dict, List, Any
 import mingus.core.notes as notes
 from mingus.containers.note import Note
 from mingus.core.mt_exceptions import NoteFormatError
@@ -344,7 +344,17 @@ def parse_notes_str(input_str: str) -> List[int]:
     pc_list.sort()
     return pc_list
 
-def calc(pc_list):
+
+def calc(pc_list: List[int]) -> Dict[str, Any]:
+    """Do calculation
+
+    Args:
+        pc_list (List[int]): List of unique pitch class integer values
+
+    Returns:
+        Dict[str, Any]: Calculation results with keys: 'normal', 'inversion',\
+            'inversion_normal', 'prime', 'best', 'icv'
+    """
     print("\n----- Calculate normal -----")
     normal = get_normal(pc_list)
     print("\n----- Calculate inversion -----")
@@ -360,19 +370,21 @@ def calc(pc_list):
     print("\n----- Calculate ICV -----")
     icv = icv_calc(prime_form)
 
-    result_dict ={
-        'normal': normal,
-        'inversion': inversion,
-        'inversion_normal': inversion_normal,
-        'prime': prime_form,
-        'best': best,
-        'icv': icv,
+    result_dict = {
+        "normal": normal,
+        "inversion": inversion,
+        "inversion_normal": inversion_normal,
+        "prime": prime_form,
+        "best": best,
+        "icv": icv,
     }
     return result_dict
 
+
 if __name__ == "__main__":
     print(
-        '*****Set Theory Calculator*****\nType in notes in set (seprated by space Eg: C Eb G F#), then press enter. Type "exit" to quit.'
+        '*****Set Theory Calculator*****\nType in notes in set (seprated by\
+            space Eg: C Eb G F#), then press enter. Type "exit" to quit.'
     )
     while True:
         user_input = input("\nNote set: ")
@@ -393,11 +405,11 @@ if __name__ == "__main__":
         print("\n========= RESULTS =========")
         print("Original input: {}".format(user_input))
         print("Pitch class (PC) list: {}".format(pc_list))
-        print("Normal: {}".format(format_pc(result['normal'])))
-        print("Inversion: {}".format(format_pc(result['inversion'])))
-        print("Inversion normal: {}".format(format_pc(result['inversion_normal'])))
-        print("Best normal order: {}".format(format_pc(result['best'])))
-        prime_str = ''.join([str(num) for num in result['prime']])
+        print("Normal: {}".format(format_pc(result["normal"])))
+        print("Inversion: {}".format(format_pc(result["inversion"])))
+        print("Inversion normal: {}".format(format_pc(result["inversion_normal"])))
+        print("Best normal order: {}".format(format_pc(result["best"])))
+        prime_str = "".join([str(num) for num in result["prime"]])
         print("Prime: [{}]".format(prime_str))
-        icv_str = "".join([str(n) for n in result['icv']])
+        icv_str = "".join([str(n) for n in result["icv"]])
         print("Interval class vector: <{}>".format(icv_str))
