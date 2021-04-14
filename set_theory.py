@@ -346,16 +346,21 @@ def parse_notes_str(input_str: str) -> List[int]:
 
 
 if __name__ == "__main__":
+    print(
+        '*****Set Theory Calculator*****\nType in notes in set (seprated by space Eg: C Eb G F#), then press enter. Type "exit" to quit.'
+    )
     while True:
-        user_input = input("\nType in notes in set (seprated by space), then press enter. (Eg: C Eb G F#)\n Notes: ")
-        print("\nParse input...")
+        user_input = input("\nNote set: ")
+        if user_input.lower().strip() == "exit":
+            exit()
+        print("Parsing input...")
         try:
             pc_list = parse_notes_str(user_input)
             if len(pc_list) == 0:
-                print("*** Empty set ***")
+                print("!! ERROR: Empty set !!")
                 continue
         except NoteFormatError:
-            print("*** Invalid input! ***")
+            print("!! ERROR: Invalid input! !!")
             continue
         print("\n----- Calculate normal -----")
         normal = get_normal(pc_list)
